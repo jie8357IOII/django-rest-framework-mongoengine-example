@@ -8,13 +8,14 @@ services:
   mongodb:
     image: mongo
     restart: always
+    container_name: mongodb
     volumes:
       - ./init-db:/docker-entrypoint-initdb.d
       - ./data-db:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mongoadmin
-      MONGO_INITDB_DATABASE: drf_mongodb_docker
+      MONGO_INITDB_DATABASE: project
     ports:
       - 27017:27017
 
@@ -33,7 +34,8 @@ services:
   web:
     image: app
     restart: always
-    command: python manage.py runserver 0.0.0.0:8000
+    container_name: web
+    command: python project/manage.py runserver
     volumes:
       - .:/drf_mongodb_docker
     ports:
@@ -44,9 +46,8 @@ services:
       - migration
 
   migration:
-    build: .
     image: app
-    command: python manage.py migrate
+    command: python project/manage.py migrate
     volumes:
       - .:/drf_mongodb_docker
     links:
@@ -57,7 +58,7 @@ services:
   make_migrations:
     build: .
     image: app
-    command: python manage.py makemigrations
+    command: python project/manage.py makemigrations
     volumes:
       - .:/drf_mongodb_docker
     links:

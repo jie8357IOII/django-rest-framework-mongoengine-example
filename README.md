@@ -3,11 +3,14 @@ Django-REST-Framework-Mongoengine example
 
 This is a complete example of a working project in Django-REST-Framework-Mongoengine.
 
-I tested it on Debian 8.
-
-
 How to use it
 -------------
+Run it on docker-compose
+
+`docker-compose  up --build`
+
+
+Or run it locally.
 
 In the toplevel directory of the project there is a requirements.txt file with all the python dependencies, required for this project to run. Install them with
 

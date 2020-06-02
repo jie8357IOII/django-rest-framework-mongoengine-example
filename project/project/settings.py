@@ -97,9 +97,13 @@ DATABASES = {
 MONGODB_DATABASES = {
     "default": {
         "name": "project",
-        "host": "localhost",
+        "host": "mongodb",
         "port": 27017,
-        "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
+        'username': 'root',
+        'password': 'mongoadmin',
+        'authSource': 'admin',
+        'authMechanism': 'SCRAM-SHA-1',
+        # "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     },
 
     "test": {
